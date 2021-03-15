@@ -5,7 +5,7 @@ from io import BytesIO
 import base64
 import requests
 
-import timm 
+#import timm 
 
 
 
