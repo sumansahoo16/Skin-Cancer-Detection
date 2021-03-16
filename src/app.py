@@ -5,7 +5,7 @@ from io import BytesIO
 import base64
 import requests
 
-import timm 
+#import timm 
 
 
 
@@ -34,7 +34,7 @@ classes = ['bgn', 'nv', 'mel',
 class SkinCancerModel(nn.Module):
     def __init__(self, model_name='resnext50_32x4d', pretrained=False):
         super().__init__()
-        self.model = timm.create_model(model_name, pretrained=pretrained)
+        self.model = torch.hub.load('pytorch/vision:v0.6.0', 'resnext50_32x4d', pretrained=False)
         n_features = self.model.fc.in_features
         self.model.fc = nn.Linear(n_features, 9)
 
