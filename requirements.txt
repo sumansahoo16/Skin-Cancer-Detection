@@ -1,8 +1,8 @@
+-f https://download.pytorch.org/whl/torch_stable.html
 Flask
 gunicorn
 numpy
-torch
-pathlib
+torch==1.8.0+cpu
+timm
 requests
 pillow
-
