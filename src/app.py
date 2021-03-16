@@ -31,16 +31,16 @@ classes = ['bgn', 'nv', 'mel',
            'bkl', 'othr', 'bcc', 'akiec', 'vasc', 'df']
 
 
-class SkinCancerModel(nn.Module):
-    def __init__(self, model_name='resnext50_32x4d', pretrained=False):
-        super().__init__()
-        self.model = torch.hub.load('pytorch/vision:v0.6.0', 'resnext50_32x4d', pretrained=False)
-        n_features = self.model.fc.in_features
-        self.model.fc = nn.Linear(n_features, 9)
-
-    def forward(self, x):
-        x = self.model(x)
-        return x
+#class SkinCancerModel(nn.Module):
+#    def __init__(self, model_name='resnext50_32x4d', pretrained=False):
+#        super().__init__()
+#        self.model = torch.hub.load('pytorch/vision:v0.6.0', 'resnext50_32x4d', pretrained=False)
+#        n_features = self.model.fc.in_features
+#        self.model.fc = nn.Linear(n_features, 9)
+#
+#    def forward(self, x):
+#        x = self.model(x)
+#        return x
 
 def open_image(fn, convert_mode:str='RGB'):
 
@@ -54,12 +54,13 @@ def open_image(fn, convert_mode:str='RGB'):
     return x.float()
 
 
-def setup_model_pth(path_to_pth_file, learner_name_to_load, classes):
-    learn = SkinCancerModel()
-    learn.load_state_dict(torch.load(learner_name_to_load, map_location=torch.device('cpu')))
-    return learn
+#def setup_model_pth(path_to_pth_file, learner_name_to_load, classes):
+#    learn = SkinCancerModel()
+#    learn.load_state_dict(torch.load(learner_name_to_load, map_location=torch.device('cpu')))
+#    return learn
 
-learn = setup_model_pth(PATH_TO_MODELS_DIR, NAME_OF_FILE, classes)
+#learn = setup_model_pth(PATH_TO_MODELS_DIR, NAME_OF_FILE, classes)
+learn = torch.load('model234')
 
 def image2np(image):
     "Convert from torch style `image` to numpy/matplotlib style"
