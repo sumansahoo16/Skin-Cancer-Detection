@@ -24,7 +24,7 @@ from PIL import Image
 # Define a flask app
 app = Flask(__name__)
 
-NAME_OF_FILE = 'src/model23.pth' # Name of your exported file
+NAME_OF_FILE = 'model23.pth' # Name of your exported file
 PATH_TO_MODELS_DIR = Path('') # by default just use /models in root dir
 
 classes = ['bgn', 'nv', 'mel',
