@@ -14,8 +14,6 @@ class SCDataset(Dataset):
     def __getitem__(self, idx):
         
         image = cv2.imread(self.csv['Id'][idx] + '.jpg')
-        try : image.shape
-        except : image = cv2.imread('ISIC_0027419' + '.jpg') 
         #image = self.transform(image=image)['image']
         image = image / 255
         
