@@ -4,7 +4,15 @@ import PIL, io, timm
 import numpy as np, base64
 from flask import render_template
 
-classes = ['bgn', 'nv', 'mel','bkl', 'othr', 'bcc', 'akiec', 'vasc', 'df']
+classes = ['Benign Cancer',
+            'Melanocytic Nevi',
+            'Melanoma ',
+            'Benign Keratosis',
+            'Irrelevant',
+            'Basal Cell Carcinoma ', 
+            'Actinic keratoses',
+            'Vascular Lesions',
+            'Dermatofibroma ']
 
 def preprocess_img(img):
     img = img.resize((224,224))
@@ -35,7 +43,7 @@ def model_predict(img, model):
     pred_probs = sorted(zip(classes, map(str, formatted_outputs)),
                         key=lambda p: p[1], reverse=True)
 	
-    result = {"class":pred_probs[0], "probs":pred_probs, "image":encode_img(img)}
+    result = {"class":pred_probs[0][0], "probs":pred_probs, "image":encode_img(img)}
     return render_template('result.html', result=result)
 
 class SkinCancerModel(torch.nn.Module):
