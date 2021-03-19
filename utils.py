@@ -4,7 +4,7 @@ import PIL, io, timm
 import numpy as np, base64
 from flask import render_template
 
-classes = ['Benign Cancer',
+classes = [ 'Benign Cancer',
             'Melanocytic Nevi',
             'Melanoma ',
             'Benign Keratosis',
@@ -12,7 +12,7 @@ classes = ['Benign Cancer',
             'Basal Cell Carcinoma ', 
             'Actinic keratoses',
             'Vascular Lesions',
-            'Dermatofibroma ']
+            'Dermatofibroma ' ]
 
 def preprocess_img(img):
     img = img.resize((224,224))
@@ -40,8 +40,10 @@ def model_predict(img, model):
     
     formatted_outputs = ["{:.1f}%".format(value) for value in [x * 100 for x in out]]
 
+
     pred_probs = sorted(zip(classes, map(str, formatted_outputs)),
-                        key=lambda p: p[1], reverse=True)
+                        key=lambda p: float(p[1][:-1]), reverse=True)
+
 	
     result = {"class":pred_probs[0][0], "probs":pred_probs, "image":encode_img(img)}
     return render_template('result.html', result=result)

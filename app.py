@@ -5,10 +5,8 @@ from utils import SkinCancerModel, model_predict
 from flask import Flask, render_template, request
 
 
-
-
 model = SkinCancerModel()
-model.load_state_dict(torch.load('abc_24.pth', map_location=torch.device('cpu')))
+model.load_state_dict(torch.load('model.pth', map_location=torch.device('cpu')))
 
 app = Flask(__name__)
 
